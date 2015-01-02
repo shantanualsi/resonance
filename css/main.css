@@ -1,0 +1,10 @@
+.pad {
+    padding: 2.4cm;
+    display: table-cell;
+    float: none;
+    width: 0cm;
+    border: 1px solid black;
+    margin: 9.2cm;
+    background-color: #932113;
+    white-space: nowrap;
+}
