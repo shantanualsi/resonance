@@ -3,8 +3,18 @@
     display: table-cell;
     float: none;
     width: 0cm;
-    border: 1px solid black;
+    border: 15px solid white;
     margin: 9.2cm;
     background-color: #932113;
     white-space: nowrap;
+}
+
+.control{
+    width: 200px;
+    padding: 10px 15px 15px 15px;
+    background:cyan;
+    margin: 15px 4px 30px 10px;
+    display: table-cell;
+    white-space: nowrap;
+    border: 15px solid white;
 }

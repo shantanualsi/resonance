@@ -32,12 +32,15 @@ function loadAudio(object, url){ // Pass the 'pad' object and URL to the loadaud
 function addAudioProperties (object) {
 	object.name = object.id;	// pad1 or pad2 or pad3 or pad4. The id property of the object.
 	object.source = $(object).data('sound'); 	// The data-sound property of the pad object
+	object.volume = context.createGain();       //Creates a Gain node for volume
 	loadAudio(object,object.source);
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
+		s.connect(object.volume);       // Connect the source to the gain node
 		s.buffer = object.buffer;				// Set the node's source property
-		s.connect(context.destination);			// Connect to the speakers. context.destination is a special node representing the computer's default sound o/p
+		// 		s.connect(context.destination);			// Connect to the speakers. context.destination is a special node representing the computer's default sound o/p
+		object.volume.connect(context.destination);     //The gain node connects to the destination now
 		s.start(0);								// Play the sound
 		object.s = s;							// Attach the audio source to the object's s property
 	}
@@ -53,6 +56,7 @@ $(function(){
 	})
 });
 
+// Adding the volume control
 
 
 
