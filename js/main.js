@@ -32,8 +32,9 @@ function loadAudio(object, url){ // Pass the 'pad' object and URL to the loadaud
 function addAudioProperties (object) {
 	object.name = object.id;	// pad1 or pad2 or pad3 or pad4. The id property of the object.
 	object.source = $(object).data('sound'); 	// The data-sound property of the pad object
-	object.volume = context.createGain();       //Creates a Gain node for volume
 	loadAudio(object,object.source);
+	object.volume = context.createGain();       //Creates a Gain node for volume
+	object.loop = false;
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
@@ -41,8 +42,12 @@ function addAudioProperties (object) {
 		s.buffer = object.buffer;				// Set the node's source property
 		// 		s.connect(context.destination);			// Connect to the speakers. context.destination is a special node representing the computer's default sound o/p
 		object.volume.connect(context.destination);     //The gain node connects to the destination now
+		s.loop = object.loop;
 		s.start(0);								// Play the sound
 		object.s = s;							// Attach the audio source to the object's s property
+	}
+	object.stop = function(){
+	    if(object.s) object.s.stop();
 	}
 }
 
@@ -51,12 +56,45 @@ $(function(){
 	$('#sp div').each(function () {
 		addAudioProperties(this);
 	});
+	
 	$('#sp div').on('click', function () {
 		this.play();
-	})
+	});
+	
+	$('#cp input').change(function(){
+	   var v = $(this).parent().data('pad'),
+	       pad = $('#'+v)[0];
+	 
+	   switch ($(this).data('control')) {
+	       case 'gain':
+	           pad.volume.gain.value = $(this).val();
+	           break;
+	       
+	       default:
+	           // code
+	   }
+	});
+	
+// 	The buttons controls
+    $('#cp button').on('click',function(){
+       var v = $(this).parent().data('pad'),
+            toggle = $(this).text(),
+            pad = $('#'+v)[0];
+        switch ($(this)[0].className){
+            case 'loop-button':
+                console.log('loop button clicked');
+                pad.stop();
+                console.log('pad stoopped');
+                $(this).text($(this).data('toggleText')).data('toggleText', toggle);
+                ($(this).val() === 'false') ? $(this).val('true'):$(this).val('false');
+                pad.loop = ($(this).val() === 'false')? false:true;
+                break;
+            default:
+                break;   
+        }   
+       
+    });
 });
-
-// Adding the volume control
 
 
 

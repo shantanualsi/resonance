@@ -1,12 +1,12 @@
 .pad {
-    padding: 2.4cm;
-    display: table-cell;
+    display: inline-block;
     float: none;
-    width: 0cm;
-    border: 15px solid white;
-    margin: 9.2cm;
+    width: 10em;
+    height:10em;
+    margin: 2px;
     background-color: #932113;
     white-space: nowrap;
+    box-shadow:rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
 }
 
 .control{
@@ -17,4 +17,10 @@
     display: table-cell;
     white-space: nowrap;
     border: 15px solid white;
+}
+
+#sp{
+    width: 25em;
+    height:25em;
+    float: left;
 }
