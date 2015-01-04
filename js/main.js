@@ -6,7 +6,7 @@ function init(){
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		context = new AudioContext();
 	}catch(e){
-		alert('Web Audio unsupported')
+		alert('Web Audio unsupported');
 	}
 }
 
@@ -41,24 +41,44 @@ function addAudioProperties (object) {
 	object.volume = context.createGain();       //Creates a Gain node for volume
 	object.loop = false;
 	object.reverb = false;
+	object.filter = false;
+	object.fqValue = 350;
+	object.qValue = 500;
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
 		s.connect(object.volume);       // Connect the source to the gain node
 		s.buffer = object.buffer;				// Set the node's source property
 		// 		s.connect(context.destination);			// Connect to the speakers. context.destination is a special node representing the computer's default sound o/p
-		if(this.reverb === true){
-		    this.convolver = context.createConvolver();
-		    this.convolver.buffer = irHall.buffer;
-		    this.volume.connect(this.convolver);
-		    this.convolver.connect(context.destination);
-		} else if(this.convolver){
-		    this.volume.disconnect(0);
-		    this.convolver.disconnect(0);
-		    this.volume.connect(context.destination);
-		} else{
-		    this.volume.connect(context.destination);
+		if(this.filter === true){
+		    this.biquad = context.createBiquadFilter();
+		    this.biquad.type = this.biquad.LOWPASS;
+		    this.biquad.frequency.value = this.fqValue;
+		    this.biquad.Q.value = this.qValue;
+		   	if(this.reverb === true){
+		        this.convolver = context.createConvolver();
+		        this.convolver.buffer = irHall.buffer;
+		        this.volume.connect(this.convolver);
+		        this.convolver.connect(context.destination);
+	    	} else{
+	    	    this.volume.disconnect(0);
+	    	    this.volume.connect(this.biquad);
+	    	    this.biquad.connect(context.destination);
+	    	}
+		}else{
+		    if(this.biquad){
+		        if(this.reverb === true){
+		            this.biquad.disconnect(0);
+		            this.convolver.disconnect(0);
+		            this.convolver.connect(context.destination);
+		        }else{
+		            this.biquad.disconnect(0);
+		            this.volume.disconnect(0);
+		            this.volume.connect(context.destination);
+		        }
+		    }
 		}
+		
 		object.volume.connect(context.destination);     //The gain node connects to the destination now
 		s.loop = object.loop;
 		s.start(0);								// Play the sound
@@ -87,7 +107,12 @@ $(function(){
 	       case 'gain':
 	           pad.volume.gain.value = $(this).val();
 	           break;
-	    
+	       case 'fq':
+	           pad.fqValue = $(this).val();
+	           break;
+	       case 'q':
+	           pad.qValue = $(this).val();
+	           break; 
 	       default:
 	           // code
 	   }
@@ -112,6 +137,13 @@ $(function(){
                 $(this).text($(this).data('toggleText')).data('toggleText', toggle);
                 ($(this).val() === 'false') ? $(this).val('true'):$(this).val('false');
                 pad.reverb = ($(this).val() == 'false')?false:true;
+                break;
+            case 'filter-button':
+                pad.stop();
+                $(this).text($(this).data('toggleText')).data('toggleText', toggle);
+                ($(this).val() === 'false') ? $(this).val('true'):$(this).val('false');
+                pad.filter = ($(this).val() == 'false') ? false:true;
+                $(this).parent().children('.filter-group').toggleClass('faded');
                 break;
             default:
                 break;   

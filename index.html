@@ -19,7 +19,12 @@
         <label for="volume 1">Volume</label>
         <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" name="volume1">
         <button type="button" class="loop-button" data-toggle-text="End Loop" value="false">Loop</button>
-        <button type="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>    
+        <button type="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>
+        <button type="button" class="filter-button" data-toggle-text="NoFiltr" value="false">Filter</button>
+        <label class="filter-group faded" for="frequency1">Frequency:</label>
+        <input class="filter-group faded" type="range" min="0" max="1000" step="1" value="350" data-control="fq" name="frequency1">
+        <label class="filter-group faded" for="Quality1">Quality</label>
+        <input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality1">
     
     </div>
     <div class="control" data-pad="pad2">
@@ -28,6 +33,11 @@
         <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" name="volume2">
         <button type="button" class="loop-button" data-toggle-text="End Loop" value="false">Loop</button>
         <button type="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>
+        <button type="button" class="filter-button" data-toggle-text="NoFiltr" value="false">Filter</button>
+        <label class="filter-group faded" for="frequency2">Frequency:</label>
+        <input class="filter-group faded" type="range" min="0" max="1000" step="1" value="350" data-control="fq" name="frequency2">
+        <label class="filter-group faded" for="Quality1">Quality</label>
+        <input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality2">
     </div>
     <div class="control" data-pad="pad3">
         <h3>Botton left pad</h3>
@@ -35,13 +45,23 @@
         <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" name="volume3">
         <button type="button" class="loop-button" data-toggle-text="End Loop" value="false">Loop</button>
         <button type="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>
+        <button type="button" class="filter-button" data-toggle-text="NoFiltr" value="false">Filter</button>
+        <label class="filter-group faded" for="frequency3">Frequency:</label>
+        <input class="filter-group faded" type="range" min="0" max="1000" step="1" value="350" data-control="fq" name="frequency3">
+        <label class="filter-group faded" for="Quality1">Quality</label>
+        <input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality3">
     </div>
     <div class="control" data-pad="pad4">
         <h3>Bottom right  pad</h3>
         <label for="volume 4">Volume</label>
         <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" name="volume4">
         <button type="button" class="loop-button" data-toggle-text="End Loop" value="false">Loop</button>
-        <button   type ="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>
+        <button type ="button" class="reverb-button" data-toggle-text="NoRevrb" value="false">Reverb</button>
+        <button type="button" class="filter-button" data-toggle-text="NoFiltr" value="false">Filter</button>
+        <label class="filter-group faded" forr="frequency4">Frequency:</label>
+        <input class="filter-group faded" type="range" min="0" max="1000" step="1" valuee="350" data-control="fq" name="frequency4">
+        <label class="filter-group faded" for="Quality1">Quality</label>
+        <input class="filter-grouup faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality4">
     </div>
 </section>
 <script type="text/javascript" src="js/lib/jquery.js"></script>
