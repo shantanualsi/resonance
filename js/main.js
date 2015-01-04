@@ -28,6 +28,11 @@ function loadAudio(object, url){ // Pass the 'pad' object and URL to the loadaud
 	request.send();
 }
 
+function reverbObject(url){
+    this.source = url;
+    loadAudio(this, url);
+}
+
 // Let's play the audio file when a pad is clicked
 function addAudioProperties (object) {
 	object.name = object.id;	// pad1 or pad2 or pad3 or pad4. The id property of the object.
@@ -35,12 +40,25 @@ function addAudioProperties (object) {
 	loadAudio(object,object.source);
 	object.volume = context.createGain();       //Creates a Gain node for volume
 	object.loop = false;
+	object.reverb = false;
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
 		s.connect(object.volume);       // Connect the source to the gain node
 		s.buffer = object.buffer;				// Set the node's source property
 		// 		s.connect(context.destination);			// Connect to the speakers. context.destination is a special node representing the computer's default sound o/p
+		if(this.reverb === true){
+		    this.convolver = context.createConvolver();
+		    this.convolver.buffer = irHall.buffer;
+		    this.volume.connect(this.convolver);
+		    this.convolver.connect(context.destination);
+		} else if(this.convolver){
+		    this.volume.disconnect(0);
+		    this.convolver.disconnect(0);
+		    this.volume.connect(context.destination);
+		} else{
+		    this.volume.connect(context.destination);
+		}
 		object.volume.connect(context.destination);     //The gain node connects to the destination now
 		s.loop = object.loop;
 		s.start(0);								// Play the sound
@@ -69,7 +87,7 @@ $(function(){
 	       case 'gain':
 	           pad.volume.gain.value = $(this).val();
 	           break;
-	       
+	    
 	       default:
 	           // code
 	   }
@@ -89,11 +107,18 @@ $(function(){
                 ($(this).val() === 'false') ? $(this).val('true'):$(this).val('false');
                 pad.loop = ($(this).val() === 'false')? false:true;
                 break;
+            case 'reverb-button':
+                pad.stop();
+                $(this).text($(this).data('toggleText')).data('toggleText', toggle);
+                ($(this).val() === 'false') ? $(this).val('true'):$(this).val('false');
+                pad.reverb = ($(this).val() == 'false')?false:true;
+                break;
             default:
                 break;   
         }   
        
     });
+    irHall = new reverbObject('audiofiles/irHall.ogg')
 });
 
 
