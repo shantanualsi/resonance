@@ -11,15 +11,24 @@ function init(){
 	}
 }
 
-function loadAudioBL(){
+function loadAudioBL(songNumber){
     bufferLoader = new BufferLoader(
         context,
         [
-                '/audiofiles/songs/Kalimba.mp3',
-                '/audiofiles/songs/Maid.mp3'
+                'audiofiles/songs/Kalimba.mp3',
+                'audiofiles/songs/Maid.mp3'
         ], doneLoading);
         
         bufferLoader.load();
+}
+
+// Unable to pass songnumber to this callback
+function doneLoading(bufferList){
+    var source = context.createBufferSource();
+    console.log('Done loading - '+this.songNumber);
+    source.buffer = bufferList[songNumber-1];
+    source.connect(context.destination);
+    source.start(0);
 }
 
 function loadAudio(object, url){ // Pass the 'pad' object and URL to the loadaudio method
@@ -164,7 +173,13 @@ $(function(){
         }   
        
     });
-    irHall = new reverbObject('audiofiles/irHall.ogg')
+    irHall = new reverbObject('audiofiles/irHall.ogg');
+    
+    
+    $('.audio-controls #play').on('click',function(){
+       loadAudioBL(1);
+       
+    });
 });
 
 
