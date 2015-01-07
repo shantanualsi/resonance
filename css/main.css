@@ -25,4 +25,19 @@
     float: left;
 }
 
+/*Audio Controls*/
+.audio-controls div{
+    display:inline;
+    padding-left: 15px;
+    padding-top:20px;
+}
+
+.audio-controls{
+    width: 100%;
+    padding-left: 40%;
+}
+
+.audio-controls>div:hover{
+    
+}
 

@@ -1,4 +1,5 @@
 var context;
+var bufferLoader;
 
 function init(){
 	try{
@@ -8,6 +9,17 @@ function init(){
 	}catch(e){
 		alert('Web Audio unsupported');
 	}
+}
+
+function loadAudioBL(){
+    bufferLoader = new BufferLoader(
+        context,
+        [
+                '/audiofiles/songs/Kalimba.mp3',
+                '/audiofiles/songs/Maid.mp3'
+        ], doneLoading);
+        
+        bufferLoader.load();
 }
 
 function loadAudio(object, url){ // Pass the 'pad' object and URL to the loadaudio method
@@ -44,6 +56,8 @@ function addAudioProperties (object) {
 	object.filter = false;
 	object.fqValue = 350;
 	object.qValue = 500;
+	
+	
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
@@ -152,6 +166,12 @@ $(function(){
     });
     irHall = new reverbObject('audiofiles/irHall.ogg')
 });
+
+
+
+// Audio controls - 
+// Later add the functionality that Play button changes to pause button when audio is playing
+
 
 
 
