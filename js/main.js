@@ -12,21 +12,19 @@ function init(){
 }
 
 function loadAudioBL(songNumber){
-    bufferLoader = new BufferLoader(
-        context,
-        [
-                'audiofiles/songs/Kalimba.mp3',
-                'audiofiles/songs/Maid.mp3'
-        ], doneLoading);
-        
-        bufferLoader.load();
+	this.songNumber = songNumber;
+	songList = ['audiofiles/songs/Kalimba.mp3',
+                'audiofiles/songs/Maid.mp3'];
+	songName = songList[songNumber];
+    bufferLoader = new BufferLoader(context,songName, doneLoading);
+    bufferLoader.load();
 }
 
 // Unable to pass songnumber to this callback
-function doneLoading(bufferList){
+function doneLoading(songName){
     var source = context.createBufferSource();
-    console.log('Done loading - '+this.songNumber);
-    source.buffer = bufferList[songNumber-1];
+    console.log('Done loading - '+songName);
+    source.buffer = songName;
     source.connect(context.destination);
     source.start(0);
 }
