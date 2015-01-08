@@ -34,10 +34,24 @@
 
 .audio-controls{
     width: 100%;
-    padding-left: 40%;
+    padding-left: 38%;
+    margin-top: 35%;
+    border: solid black;
+    padding-top: 30px;
+    padding-bottom: 31px;
 }
 
 .audio-controls>div:hover{
     
+}
+
+#play{
+    height: 90px;
+    width: 90px;
+}
+
+#pause,#stop{
+    vertical-align: top;
+    margin:33px;
 }
 
