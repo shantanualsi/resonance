@@ -25,6 +25,12 @@
     float: left;
 }
 
+body{
+    background-color: #CFD8DC;
+}
+section{
+    border: 1px black solid;
+}
 /*Audio Controls*/
 .audio-controls div{
     display:inline;
@@ -36,7 +42,6 @@
     width: 100%;
     padding-left: 38%;
     margin-top: 35%;
-    border: solid black;
     padding-top: 30px;
     padding-bottom: 31px;
 }

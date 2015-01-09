@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Resonance!</title>
+	<title>Resonance! Playing around with Webaudio</title>
 	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
@@ -67,13 +67,21 @@
 </section>
 <!-- Audio controls -->
 <section class="audio-controls">
-    <div><image id="pause" src="icons/pause.svg" onerror="this.onerror=null; this.src='image/pause.png'"/></div>
-    <div><image id="play" src="icons/play.svg" onerror="this.onerror=null; this.src='image/play.png'"/></div>
-    <div ><image id="stop" src="icons/stop.svg" onerror="this.onerror=null; this.src='image/stop.png'"/></div>
-</section>
+    <svg>
+        <path id="pause" d="M4 4h10v24h-10zM18 4h10v24h-10z" fill="#444444"></path>
+    </svg>
+    <svg>
+        <path id="play" d="M6 4l20 12-20 12z" fill="#444444"></path>
+    </svg>
+    <svg>
+        <path id="stop" d="M4 4h24v24h-24z" fill="#444444"></path>
+    </svg>
+
+    </section>
 <script type="text/javascript" src="js/lib/jquery.js"></script>
 <script type="text/javascript" src="js/lib/materialize.js"></script>
 <script type="text/javascript" src="js/BufferLoader.js"></script>
 <script type="text/javascript" src ="js/main.js"></script>
 </body>
 </html>
+
