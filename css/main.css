@@ -50,13 +50,49 @@ section{
     
 }
 
-#play{
+.primary-media-button{
     height: 90px;
     width: 90px;
 }
 
-#pause,#stop{
+.secondary-media-button{
     vertical-align: top;
     margin:33px;
 }
 
+#primary-volume-rocker{
+    float:right;
+    width: 200px;
+    padding-right:40px;
+    white-space: nowrap;
+    margin-top: 20px;
+}
+
+#loop{
+    float:left;
+}
+
+nav{
+    background-color: #e53935;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.side-nav li{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+input[type=range][orient=vertical]
+{
+    -webkit-transform: rotate(90); /* WebKit */
+}
+
+.waves-green{
+    background-color: transparent;
+    color: black;
+}
+
+.waves-green:hover{
+
+}
