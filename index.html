@@ -65,23 +65,77 @@
         <input class="filter-grouup faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality4">
     </div>
 </section>
-<!-- Audio controls -->
-<section class="audio-controls">
-    <svg>
-        <path id="pause" d="M4 4h10v24h-10zM18 4h10v24h-10z" fill="#444444"></path>
-    </svg>
-    <svg>
-        <path id="play" d="M6 4l20 12-20 12z" fill="#444444"></path>
-    </svg>
-    <svg>
-        <path id="stop" d="M4 4h24v24h-24z" fill="#444444"></path>
-    </svg>
+<!-- Top navigation menu -->
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="#!" class="brand-logo">Resonance</a>
+                <ul class="right side-nav">
+                    <li href="#">Link1</li>
+                    <li href="#">Link2</li>
+                    <li href="#aboutme-modal" class="aboutme-modal-trigger">About Me</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
 
-    </section>
+
+<!-- Audio controls -->
+<div class="loadButton"> 
+    <a class="waves-effect waves-green btn secondary-content" href="#">Load</a>
+</div>
+
+<div class="loadButton"> 
+    <a class="waves-effect btn secondary-content" href="#">Load</a>
+</div>
+
+<div id="reverbButton">
+    <a class="waves-effect btn secondary-content" href="#!" data-toggle-text="No Reverb">Reverb</a>
+</div>
+
+
+<div class="row">
+    
+</div>
+
+<div class="row">
+    
+</div>
+
+<div class="row card-panel audio-controls">
+ <a class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-content-add"></i></a>
+    <div id="pause">
+        <i class="mdi-av-pause medium"></i>
+    </div>
+    <div id="play">
+        <i class="mdi-av-play-arrow large"></i>
+    </div>
+    <div id="stop">
+        <i class="mdi-av-stop medium"></i>
+    </div>
+    <div id="loop">
+        <i class="mdi-av-repeat medium"></i>
+    </div>
+    <div id="primary-volume-rocker range-field">
+        <label for="primary-volume"><i class="mdi-av-volume-up medium"></i></label>
+        <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" orient="vertical" name="primary-volume-rocker">
+    </div>
+</div>
+
+<div id="aboutme-modal">
+    <div id="modal1" class="modal">
+    <h4>Shantanu Alshi</h4>
+    <p>I am a student of Computer Science at National University of Singapore</p>
+    <a href="#" class="waves-effect btn-flat modal-close">Contact Me</a>
+  </div>
+</div>
+
 <script type="text/javascript" src="js/lib/jquery.js"></script>
 <script type="text/javascript" src="js/lib/materialize.js"></script>
 <script type="text/javascript" src="js/BufferLoader.js"></script>
-<script type="text/javascript" src ="js/main.js"></script>
+<script type="text/javascript" src ="js/player.js"></script>
 </body>
 </html>
 
