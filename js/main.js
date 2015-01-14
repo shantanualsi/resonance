@@ -54,6 +54,7 @@ function reverbObject(url){
 
 // Let's play the audio file when a pad is clicked
 function addAudioProperties (object) {
+	console.log("Adding audio properties ... ")
 	object.name = object.id;	// pad1 or pad2 or pad3 or pad4. The id property of the object.
 	object.source = $(object).data('sound'); 	// The data-sound property of the pad object
 	loadAudio(object,object.source);
@@ -64,9 +65,11 @@ function addAudioProperties (object) {
 	object.fqValue = 350;
 	object.qValue = 500;
 	
+	console.log("Added audio properties ... ");
 	
 	// The createBufferSource will create a new node in the AudioContext.
 	object.play = function () {		// Give the pad object a play method.
+		console.log("Play called");
 		var s = context.createBufferSource();	// Call the AudioContext's createBufferSource to make a new Audio buffer source node
 		s.connect(object.volume);       // Connect the source to the gain node
 		s.buffer = object.buffer;				// Set the node's source property
@@ -175,8 +178,19 @@ $(function(){
     
     
     $('.audio-controls #play').on('click',function(){
+       console.log("Clicked!	")
        loadAudioBL(1);
        
+    });
+
+    $('.loadButton').on('load', function(){
+    	console.log('Loading audio');
+    	$(this).attr('data-sound', 'audiofiles/songs/Kalimba.mp3');
+    	addAudioProperties(this)
+    });
+
+    $('.loadButton').on('click', function(){
+    	this.play();
     });
 });
 
