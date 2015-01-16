@@ -105,7 +105,7 @@ $(function(){
 		toast('Reverb Clicked', 200)
 	});
 
-	$('aboutme-modal-trigger').leanModal();
+	$('.aboutme-modal-trigger').leanModal();
 
 });
 
