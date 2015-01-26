@@ -100,3 +100,9 @@ nav{
     top:75%;
     right:10%;
 }
+
+.main-volume-control{
+        position: fixed;
+        right: 5em;
+        bottom: 1.5em;
+}
