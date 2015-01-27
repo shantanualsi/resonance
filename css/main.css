@@ -39,6 +39,15 @@ section{
     height: 40px;
 }
 
+label{
+    display:inline;
+    float:left;
+}
+
+input{
+    clear:none;
+}
+
 .audio-controls{
     height: 20%;
     width: 100%;
@@ -110,7 +119,8 @@ nav{
 .card{
     height:20%;
     width: 20%;
-    margin:1%;
+    margin-left:1%;
+    margin-top:2%;
     display:inline-block;
 }
 
