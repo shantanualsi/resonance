@@ -112,15 +112,28 @@
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">Tube Reverb<i class="mdi-navigation-close right"></i></span> 
           <!-- <a class="waves-effect btn-flat waves-red" href="#" data-toggle-text="Turn Off">Turn On</a> -->
-          
-          <label for="reverb2-volume">Volume</label>
-          <input class="filter-group faded" type="range" min="0" max="1000" step="1" valuee="350" data-control="fq" name="reverb2-volume">
-
-          <label class="filter-group faded" for="reverb2-frequency">Frequency</label>
-          <input class="filter-group faded" type="range" min="0" max="1000" step="1" valuee="350" data-control="fq" name="reverb2-frequency">
-
-          <label class="filter-group faded" for="reverb2-quality">Quality</label>
-          <input class="filter-grouup faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="reverb2-quality">
+          <div class="reverb-controls">
+              <div class="inlineLabel">
+                <label for="reverb2-volume">Volume</label>
+              </div>
+              <div class="inlineInput">
+                <input class="filter-group faded" type="range" min="0" max="1000" step="1" valuee="350" data-control="fq" name="reverb2-volume">
+              </div>
+              <span class="clearFloat"></span>
+              <div class="inlineLabel">
+              <label class="filter-group faded" for="reverb2-frequency">Frequency</label>
+              </div>
+              <div class="inlineInput">
+                <input class="filter-group faded" type="range" min="0" max="1000" step="1" valuee="350" data-control="fq" name="reverb2-frequency">
+              </div>
+              <span class="clearFloat"></span>
+              <div class="inlineLabel">
+                <label class="filter-group faded" for="reverb2-quality">Quality</label>
+              </div>
+              <div class="inlineInput">
+                <input class="filter-grouup faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="reverb2-quality">
+              </div>
+          </div>
         </div>
 </div>
 
@@ -130,6 +143,10 @@
 <!-- Audio controls -->
 <div class="row card-panel audio-controls">
     <div id="pause">
+    <div id="primary-volume-rocker range-field">
+        <label for="primary-volume"><i class="mdi-av-volume-up small main-volume-control-label"></i></label>
+        <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" orient="vertical" name="primary-volume-rocker">
+    </div>
         <i class="mdi-av-pause medium"></i>
     </div>
     <div id="play">
@@ -141,13 +158,9 @@
     <div id="loop">
         <i class="mdi-av-repeat medium"></i>
     </div>
-    <div id="primary-volume-rocker range-field">
-        <label for="primary-volume"><i class="mdi-av-volume-up small main-volume-control"></i></label>
-        <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" orient="vertical" name="primary-volume-rocker">
-    </div>
 </div>
 
-<a class="btn-floating btn-large waves-effect waves-light red add-song-button"><i class="mdi-content-add"></i></a>
+<a class="btn-floating btn-large waves-effect waves-light red add-song-button loadButton"><i class="mdi-content-add"></i></a>
 
 <!-- About me modal box -->
 <div id="aboutme-modal" class="modal">

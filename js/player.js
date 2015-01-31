@@ -69,7 +69,7 @@ $(function(){
 		addAudioProperties(this);
 	});
 	$('.loadButton').on('click', function(){
-		$('#play').attr('data-sound','audiofiles/kick.wav');
+		$('#play').attr('data-sound','audiofiles/songs/Kalimba.mp3');
 		
 	});
 

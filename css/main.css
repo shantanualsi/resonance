@@ -79,6 +79,10 @@ input{
     margin-top: 20px;
 }
 
+#primary-volume-rocker{
+    width:20px;
+}
+
 #loop{
     float:left;
 }
@@ -110,12 +114,13 @@ nav{
     right:10%;
 }
 
-.main-volume-control{
+.main-volume-control-label{
         position: fixed;
         right: 5em;
         bottom: 1.5em;
 }
 
+/*Card hacks. Need a proper method to fix these.*/
 .card{
     height:20%;
     width: 20%;
@@ -125,11 +130,27 @@ nav{
 }
 
 
-/*Card hacks. Need a proper method to fix these.*/
 .card-content{
     background-color: white;
 }
 
 .card-image{
     margin:-2%;
+}
+
+
+.inlineInput{
+    width: 90%;
+}
+
+.inlineLabel,.inlineInput{
+    display: table-cell;
+    border-bottom-width: 0px;
+    width:50%;
+    padding-top:15px;
+}
+
+
+.clearFloat{
+    display: block;
 }
