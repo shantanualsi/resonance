@@ -25,31 +25,56 @@ function loadAudio(object, songUrl){
 	request.send();
 }
 
+function reverbObject (url) {
+	this.source = url;
+	loadAudio(this,url);
+}
+
+
+function setupAnalyzer(){
+	
+	return analyser;
+}
 
 function addAudioProperties(object){
 	console.log('Adding audio properties...');
 	object.name = object.id;
 	object.source = "";
 	console.log("Done adding audio properties");
-
+	// Adding for Frequency Spectrum
+	javaScriptNode = context.createScriptProcessor(2048,1,1);
 	// changes for the volume Rocker
 	object.volume = context.createGain(); // Create a gain node
 	object.loop = false;
+	// This will call the javascript nodes when 2048 frames have been sampled. Approx 21 times/sec since our data is sampled at 44.1k
+	// javascriptNode = context.createJavaScriptNode(2048,1,1);
+
 	object.play = function(){
 		console.log("Now playing...");
 		var s = context.createBufferSource();
 		s.connect(object.volume);
 		s.buffer = object.buffer;
 		s.loop = object.loop;
-		object.volume.connect(context.destination);		
+		object.volume.connect(javaScriptNode);
+		javaScriptNode.connect(context.destination);
 		s.start(0);
 		object.s = s;
 	}
 
 	object.stop = function(){
-		if(object.s) 
+		if(object.s)
 			object.s.stop();
 	}
+}
+
+
+// Add Enhancements to Audio
+function addReverb(reverbCode) {
+	
+}
+
+function changeVolume(vol){
+	$('#play')[0].volume.gain.value = vol;
 }
 
 function addAudioSource(object){
@@ -60,9 +85,13 @@ function addAudioSource(object){
 	loadAudio(object, object.source);
 }
 
-
-
 $(function(){
+	//  Not sure which function this should go to -- --------
+
+	// ---------------
+	// Reverb Audio files 
+	irHallReverb = new reverbObject('audiofiles/irHall.ogg');
+
 	// On load functions
 	init();
 	$('#play').each(function(){
@@ -70,7 +99,7 @@ $(function(){
 	});
 	$('.loadButton').on('click', function(){
 		$('#play').attr('data-sound','audiofiles/songs/Kalimba.mp3');
-		
+
 	});
 
 	// On Click functions
@@ -88,7 +117,7 @@ $(function(){
 		if($(this).attr('looping') == "true"){
 			toast('Repeat Off', 4000);
 			$('#play')[0].loop = false;
-			$(this).attr('looping', false);	
+			$(this).attr('looping', false);
 		}else{
 			toast('Repeat On', 4000);
 			$('#play')[0].loop = true;
@@ -96,21 +125,31 @@ $(function(){
 		}
 	});
 
+	// Audio controls: Reverb
+
+	
+
+
 	// Volume controls
 	$('#primary-volume-rocker input').change(function(){
-		$('#play')[0].volume.gain.value = $(this).val();
+		changeVolume($(this).val());
+	});
+
+	$('.main-volume-control-label').on('click',function(){
+		$(this).animate({
+			right:'10px'
+		})
+		$('primary-volume-rocker').show();
 	});
 
 	$('#reverbButton').on('click',function(){
 		toast('Reverb Clicked', 200)
 	});
 
+	// Modals
 	$('.aboutme-modal-trigger').leanModal();
 
 });
 
-//Feel you can do better than A.R.Rahman and Hans Zimmer? Go awesome with Resonance! 
-// Add effects to your favourite songs
-
-
-
+//Feel you can do better than A.R.Rahman and Hans Zimmer? Go awesome with Resonance!
+// Add effects to your favourite song

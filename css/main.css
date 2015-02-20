@@ -33,10 +33,11 @@ section{
 }
 /*Audio Controls*/
 .audio-controls div{
-    display:inline;
-    padding-left: 15px;
+    display: center;
+    padding-left: 27px;
     padding-top:20px;
-    height: 40px;
+    /* height: 40px; */
+    /* margin: 0 auto; */
 }
 
 label{
@@ -51,14 +52,17 @@ input{
 .audio-controls{
     height: 20%;
     width: 100%;
-    padding-left: 35%;
+    /* padding-left: 35%; */
     bottom: -5px;
     position: fixed;
+    /* margin:0 auto; */
 
+    display: flex;
+    justify-content: center;
 }
 
 .audio-controls>div:hover{
-    
+
 }
 
 .primary-media-button{
@@ -77,10 +81,11 @@ input{
     padding-right:40px;
     white-space: nowrap;
     margin-top: 20px;
-}
-
-#primary-volume-rocker{
-    width:20px;
+    width: 400px;
+    position: inherit;
+    bottom:3.5em;
+    right: 0%;
+    display: none;
 }
 
 #loop{
@@ -101,10 +106,6 @@ nav{
 .waves-green{
     background-color: transparent;
     color: black;
-}
-
-.waves-green:hover{
-
 }
 
 .add-song-button{
@@ -143,7 +144,7 @@ nav{
     width: 90%;
 }
 
-.inlineLabel,.inlineInput{
+.inline-label,.inline-input{
     display: table-cell;
     border-bottom-width: 0px;
     width:50%;
@@ -153,4 +154,10 @@ nav{
 
 .clearFloat{
     display: block;
+}
+
+
+
+#adver{
+    display: none;
 }
