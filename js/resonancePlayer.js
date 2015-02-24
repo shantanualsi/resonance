@@ -20,10 +20,14 @@ function loadAudio (songlist) {
 
 
 function doneLoading (bufferList) {
-	source = context.createBufferSource();
-	source.buffer = bufferList[0];
-	source.connect(context.destination);
-	source.start(0);
+	try{
+		source = context.createBufferSource();
+		source.buffer = bufferList[0];
+		source.connect(context.destination);
+		source.start(0);
+	}catch(e){
+		toast("Some error occured while starting audio");
+	}
 }
 
 function stopAudio(){
@@ -42,8 +46,14 @@ $(function(){
 	// Play audio on clicking play button
 	$('#play').on('click', function(){
 		// addAudioSource(this);
-		song = Array($('#play').data('sound'));
-		loadAudio(song);
+		song = $('#play').data('sound');
+		
+		if(song === undefined){
+			toast("Audio not loaded");
+			console.log('Audio not loaded')
+		} else{	
+			loadAudio(Array(song));
+		}
 	});
 
 	// Stop audio on clicking stop button
@@ -51,6 +61,6 @@ $(function(){
 		stopAudio();
 	});
 
-	// Add Reverb Effect
+	// Volume controls
 
 });
