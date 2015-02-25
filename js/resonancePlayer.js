@@ -36,6 +36,13 @@ function stopAudio(){
 	}	
 }
 
+function changeVolume (element) {
+	console.log("Value :"+element.val());
+	console.log("Max : " + element.prop('max'))
+	var fraction = parseInt(element.val()) / parseInt(element.max);
+	source.volume.gain.value = vol;
+}
+
 $(function(){
 	init();
 	// Load the audio file as a data attribute on clicking the load button (+)
@@ -62,5 +69,10 @@ $(function(){
 	});
 
 	// Volume controls
+	$('#primary-volume-rocker input').change(function(){
+		changeVolume($(this));
+	});
 
+
+	
 });
