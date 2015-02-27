@@ -1,16 +1,19 @@
 function Audio (context) {
 	this.context = context;
+	this.gainNode = null;
+	this.playing = false;
 }
 
 Audio.prototype.setupProperties = function(bufferList, audioObj) {
-	console.log(bufferList);
-	console.trace();
 	try{
 		audioObj.source = context.createBufferSource();
 		audioObj.source.buffer = bufferList[0];
 		audioObj.source.loop = false;
-		audioObj.source.connect(context.destination);
+		audioObj.gainNode = audioObj.context.createGain();
+		audioObj.source.connect(audioObj.gainNode);
+		audioObj.gainNode.connect(audioObj.context.destination);
 	}catch(e){
+		console.log(e);
 		toast("Some error occured while starting audio");
 	}
 }
@@ -22,8 +25,8 @@ Audio.prototype.load = function(filename) {
 }
 
 Audio.prototype.changeVolume = function(element) {
-	var fraction = parseInt(element.val()) / parseInt(element.max);
-	this.source.volume.gain.value = vol;
+	var vol = parseInt(element.val()) / parseInt(element.prop('max'));
+	this.gainNode.gain.value = vol*vol;
 }
 
 Audio.prototype.play = function(){

@@ -1,9 +1,10 @@
-function BufferLoader(context, urlList, callback) {
+function BufferLoader(context, urlList, audioObj, callback) {
   this.context = context;
   this.urlList = urlList;
   this.onload = callback;
   this.bufferList = new Array();
   this.loadCount = 0;
+  this.audioObj = audioObj;
 }
 
 BufferLoader.prototype.loadBuffer = function(url, index) {
@@ -25,7 +26,7 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
         }
         loader.bufferList[index] = buffer;
         if (++loader.loadCount == loader.urlList.length)
-          loader.onload(loader.bufferList);
+          loader.onload(loader.bufferList,loader.audioObj);
       },
       function(error) {
         console.error('decodeAudioData error', error);
@@ -42,5 +43,5 @@ BufferLoader.prototype.loadBuffer = function(url, index) {
 
 BufferLoader.prototype.load = function() {
   for (var i = 0; i < this.urlList.length; ++i)
-  this.loadBuffer(this.urlList[i], i);
+    this.loadBuffer(this.urlList[i], i);
 }

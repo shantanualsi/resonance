@@ -6,7 +6,8 @@ var bufferLoader;
 function init () {
 	try{
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	context = new AudioContext();		
+		context = new AudioContext();		
+		audio = new Audio(context);
 	}catch(e){
 		toast('Web Audio Not upported')
 	}
@@ -21,11 +22,18 @@ function loadAudio (songlist) {
 
 function doneLoading (bufferList) {
 	try{
+		var gainNode;
 		source = context.createBufferSource();
 		source.buffer = bufferList[0];
-		source.connect(context.destination);
+		if(!context.createGain){
+			gainNode = context.createGain();
+		}
+		source.loop = false;
+		source.connect(gainNode);
+		gainNode.connect(context.destination);
 		source.start(0);
 	}catch(e){
+		console.log(e)
 		toast("Some error occured while starting audio");
 	}
 }
@@ -37,8 +45,6 @@ function stopAudio(){
 }
 
 function changeVolume (element) {
-	console.log("Value :"+element.val());
-	console.log("Max : " + element.prop('max'))
 	var fraction = parseInt(element.val()) / parseInt(element.max);
 	source.volume.gain.value = vol;
 }
@@ -48,31 +54,32 @@ $(function(){
 	// Load the audio file as a data attribute on clicking the load button (+)
 	$('.loadButton').on('click', function(){
 		$('#play').attr('data-sound','audiofiles/songs/Kalimba.mp3');
+		audio.load(Array($('#play').data('sound')));
 	});
 
 	// Play audio on clicking play button
 	$('#play').on('click', function(){
 		// addAudioSource(this);
-		song = $('#play').data('sound');
+			audio.play();
 		
-		if(song === undefined){
-			toast("Audio not loaded");
-			console.log('Audio not loaded')
-		} else{	
-			loadAudio(Array(song));
-		}
+		// song = $('#play').data('sound');
+		// if(song === undefined){
+		// 	toast("Audio not loaded");
+		// 	console.log('Audio not loaded')
+		// } else{	
+		// }
 	});
 
 	// Stop audio on clicking stop button
 	$('#stop').on('click', function () {
-		stopAudio();
+		audio.stop();
 	});
 
 	// Volume controls
 	$('#primary-volume-rocker input').change(function(){
-		changeVolume($(this));
+		audio.changeVolume($(this));
 	});
 
 
-	
+
 });
