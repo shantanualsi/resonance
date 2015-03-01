@@ -4,13 +4,16 @@ var bufferLoader;
 // audioFiles = [] // An array that will store all the Audio files to be played
 
 function init () {
-	try{
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
-		context = new AudioContext();		
-		audio = new Audio(context);
-	}catch(e){
-		toast('Web Audio Not supported')
-	}
+		context = new AudioContext();
+		var c = $('#spectrum-canvas')[0];
+		var ctx = c.getContext('2d');		
+		audio = new Audio(context,ctx);
+	// try{
+	// }catch(e){
+	// 	console.error(e);
+	// 	toast('Web Audio Not supported')
+	// }
 }
 
 
@@ -54,13 +57,12 @@ $(function(){
 	// Load the audio file as a data attribute on clicking the load button (+)
 	$('.loadButton').on('click', function(){
 		$('#play').attr('data-sound','audiofiles/songs/Kalimba.mp3');
-		audio.load(Array($('#play').data('sound')));
 	});
 
 	// Play audio on clicking play button
 	$('#play').on('click', function(){
 		// addAudioSource(this);
-			audio.play();
+		audio.play(Array($('#play').data('sound')));
 		
 		// song = $('#play').data('sound');
 		// if(song === undefined){
@@ -79,7 +81,4 @@ $(function(){
 	$('#primary-volume-rocker input').change(function(){
 		audio.changeVolume($(this));
 	});
-
-
-
 });
