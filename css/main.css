@@ -70,7 +70,7 @@ input{
     padding-top: 0;
 }
 
-.audio-controls>div:hover{
+.primary-controls > div:hover{
     cursor:pointer;
     opacity:0.8;
 }
