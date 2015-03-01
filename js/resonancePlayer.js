@@ -9,7 +9,7 @@ function init () {
 		context = new AudioContext();		
 		audio = new Audio(context);
 	}catch(e){
-		toast('Web Audio Not upported')
+		toast('Web Audio Not supported')
 	}
 }
 

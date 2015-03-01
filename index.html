@@ -6,13 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<section id="sp" style="display:none">
-	<div class="pad" id="pad1" data-sound='audiofiles/kick.wav'></div>
-	<div class="pad" id="pad2" data-sound='audiofiles/snare.wav'></div>
-	<div class="pad" id="pad3" data-sound='audiofiles/tin.wav'></div>
-	<div class="pad" id="pad4" data-sound='audiofiles/hat.wav'></div>
-</section>
-
 <section id="cp">
     <!--The control panel -->
     <div class="control"  data-pad="pad1" style="display:none">
@@ -166,9 +159,11 @@
 
 <!-- Audio controls -->
 <div class="row card-panel audio-controls">
-    <div id="pause" class="btn-control"><i class="mdi-av-pause medium"></i></div>
-    <div id="play" class="btn-control"><i class="mdi-av-play-arrow large"></i></div>
-    <div id="stop" class="btn-control"><i class="mdi-av-stop medium"></i></div>
+    <div id="primary-controls">
+        <div id="pause" class="btn-control"><i class="mdi-av-pause medium"></i></div>
+        <div id="play" class="btn-control"><i class="mdi-av-play-arrow large"></i></div>
+        <div id="stop" class="btn-control"><i class="mdi-av-stop medium"></i></div>
+    </div>
     <div id="primary-volume-rocker" class="btn-control range-field">
     <div class="inline-label">
         <label for="primary-volume"><i class="mdi-av-volume-up small main-volume-control-label"></i></label>

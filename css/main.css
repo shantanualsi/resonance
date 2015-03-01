@@ -19,6 +19,10 @@
     border: 15px solid white;
 }
 
+#primary-controls{
+    display: flex;
+}
+
 #sp{
     width: 25em;
     height:25em;
@@ -32,12 +36,15 @@ section{
     border: 1px black solid;
 }
 /*Audio Controls*/
-.audio-controls div{
+#primary-controls div{
     display: center;
     padding-left: 27px;
-    padding-top:20px;
+    /* padding-top:20px; */
     /* height: 40px; */
     /* margin: 0 auto; */
+    position: relative;
+    top: 50%;
+    /* transform: translateY(-50%); */
 }
 
 label{
@@ -47,6 +54,7 @@ label{
 
 input{
     clear:none;
+     -webkit-appearance: slider-vertical;
 }
 
 .audio-controls{
@@ -55,14 +63,17 @@ input{
     /* padding-left: 35%; */
     bottom: -5px;
     position: fixed;
-    /* margin:0 auto; */
+    margin:0 auto;
 
     display: flex;
     justify-content: center;
+    padding-top: 0;
 }
 
 .audio-controls>div:hover{
-
+    cursor:pointer;
+    opacity:0.8;
+}
 }
 
 .primary-media-button{

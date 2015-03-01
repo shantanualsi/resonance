@@ -16,25 +16,28 @@ Audio.prototype.setupProperties = function(bufferList, audioObj) {
 		console.log(e);
 		toast("Some error occured while starting audio");
 	}
-}
+};
 
 Audio.prototype.load = function(filename) {
 	console.log(this);
 	this.bufferLoader = new BufferLoader(this.context,filename, this, this.setupProperties);
 	this.bufferLoader.load();
-}
+};
 
 Audio.prototype.changeVolume = function(element) {
 	var vol = parseInt(element.val()) / parseInt(element.prop('max'));
 	this.gainNode.gain.value = vol*vol;
-}
+};
 
 Audio.prototype.play = function(){
+	// If this.playing is false, then load audio again.
 	this.source.start(0);
-}
+};
 
 Audio.prototype.stop = function() {
 	if(this.source){
 		this.source.stop();
 	}
-}
+};
+
+
