@@ -171,3 +171,9 @@ nav{
 #adver{
     display: none;
 }
+
+
+.spectrum-canvas-container{
+    width:100%;
+    height: 465px;
+}

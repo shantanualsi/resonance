@@ -1,19 +1,20 @@
 window.onload = init;
 var context,source;
 var bufferLoader;
-// audioFiles = [] // An array that will store all the Audio files to be played
 
 function init () {
+	try{
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		context = new AudioContext();
 		var c = $('#spectrum-canvas')[0];
 		var ctx = c.getContext('2d');		
+		
 		audio = new Audio(context,ctx);
-	// try{
-	// }catch(e){
-	// 	console.error(e);
-	// 	toast('Web Audio Not supported')
-	// }
+		fitToContainer(c);
+	}catch(e){
+		console.error(e);
+		toast('Web Audio Not supported')
+	}
 }
 
 
@@ -52,8 +53,15 @@ function changeVolume (element) {
 	source.volume.gain.value = vol;
 }
 
+// Hack to fit the canvas to screen. TODO: Find any other efficient CSS to do this.
+function fitToContainer(canvas){
+  	canvas.style.width='100%';
+	canvas.style.height='100%';
+	canvas.width  = canvas.offsetWidth;
+	canvas.height = canvas.offsetHeight;
+}
+
 $(function(){
-	init();
 	// Load the audio file as a data attribute on clicking the load button (+)
 	$('.loadButton').on('click', function(){
 		$('#play').attr('data-sound','audiofiles/songs/Kalimba.mp3');
@@ -61,15 +69,7 @@ $(function(){
 
 	// Play audio on clicking play button
 	$('#play').on('click', function(){
-		// addAudioSource(this);
 		audio.play(Array($('#play').data('sound')));
-		
-		// song = $('#play').data('sound');
-		// if(song === undefined){
-		// 	toast("Audio not loaded");
-		// 	console.log('Audio not loaded')
-		// } else{	
-		// }
 	});
 
 	// Stop audio on clicking stop button

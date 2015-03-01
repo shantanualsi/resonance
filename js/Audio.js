@@ -1,4 +1,3 @@
-var javascriptNode;
 function Audio (context, ctx) {
 	this.context = context;
 	this.gainNode = null;
@@ -26,8 +25,8 @@ Audio.prototype.setupProperties = function(bufferList, audioObj) {
 		// For the analyzer:
 		// Script Processor Node(bufferSize, inputChannels, outputChannels)
 		audioObj.analyser = audioObj.context.createAnalyser();
-		audioObj.analyser.smoothingTimeConstant = 0.3
-		audioObj.analyser.fftSize = 512;
+		audioObj.analyser.smoothingTimeConstant = 0.5
+		audioObj.analyser.fftSize = 1024;
 		audioObj.javascriptNode.connect(context.destination);
 		
 		audioObj.gainNode.connect(audioObj.analyser);
@@ -38,11 +37,12 @@ Audio.prototype.setupProperties = function(bufferList, audioObj) {
 			audioObj.analyser.getByteFrequencyData(array);
 			var average = getAverageVolume(array);
 
-			audioObj.ctx.clearRect(0,0,1000,325);
+			audioObj.ctx.clearRect(0,0,1400,460);
 			audioObj.ctx.fillStyle = audioObj.gradient;
 			// audioObj.ctx.fillRect(0,130-average,25,130);
 			drawAudioSpectrum(array, audioObj.ctx)
 		}
+
 		audioObj.source.start(0);
 	}catch(e){
 		console.log(e);
@@ -51,7 +51,6 @@ Audio.prototype.setupProperties = function(bufferList, audioObj) {
 };
 
 Audio.prototype.load = function(filename) {
-	console.log(this);
 	this.bufferLoader = new BufferLoader(this.context,filename, this, this.setupProperties);
 	this.bufferLoader.load();
 };
@@ -68,7 +67,7 @@ Audio.prototype.play = function(filename){
 Audio.prototype.stop = function() {
 	if(this.source){
 		this.source.stop();
-		this.ctx.clearRect(0,0,1000,325);
+		this.ctx.clearRect(0,0,1400,460);
 	}
 };
 
@@ -89,7 +88,6 @@ function getAverageVolume (array) {
 function drawAudioSpectrum (array,ctx) {
 	for(var i=0;i<array.length;i++){
 		var value = array[i];
-		ctx.fillRect(i*5,325-value,3,325);
-		console.log([i,value]);
+		ctx.fillRect(i*10,300-value,5,900);
 	}
-}
+};
