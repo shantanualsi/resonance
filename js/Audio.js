@@ -18,19 +18,28 @@ Audio.prototype.setupProperties = function(bufferList, audioObj) {
 		audioObj.source.buffer = bufferList[0];
 		audioObj.source.loop = false;
 		audioObj.gainNode = audioObj.context.createGain();
-		audioObj.source.connect(audioObj.gainNode);
-		audioObj.gainNode.connect(audioObj.context.destination);
 
 
 		// For the analyzer:
+
 		// Script Processor Node(bufferSize, inputChannels, outputChannels)
 		audioObj.analyser = audioObj.context.createAnalyser();
 		audioObj.analyser.smoothingTimeConstant = 0.5
 		audioObj.analyser.fftSize = 1024;
 		audioObj.javascriptNode.connect(context.destination);
 		
+		// For the filters
+		audioObj.filter = context.createBiquadFilter();
+		audioObj.filter.type = (typeof audioObj.filter.type === 'string') ? 'lowpass' : 0; // LOWPASS
+		audioObj.filter.frequency.value = 0;
+
+		audioObj.source.connect(audioObj.filter);
+		audioObj.filter.connect(audioObj.gainNode);
+		audioObj.gainNode.connect(audioObj.context.destination);
+
 		audioObj.gainNode.connect(audioObj.analyser);
 		audioObj.analyser.connect(audioObj.javascriptNode);
+
 		
 		audioObj.javascriptNode.onaudioprocess = function() {
 			var array = new Uint8Array(audioObj.analyser.frequencyBinCount);
@@ -71,6 +80,18 @@ Audio.prototype.stop = function() {
 	}
 };
 
+
+Audio.prototype.changeFrequency = function(element) {
+	// Clamp the frequency between the minimum value and half of the sampling rate.
+	var minVal = 40;
+	var maxVal = this.context.sampleRate / 2;
+	// To calculate how many octaves fall within that range, we calculate log to the base 2
+	var numOctaves = Math.log(maxVal/minVal)/Math.LN2;
+	// Now computing a multiplier from 0 to 1 based on an exponential scale
+	var multiplier = Math.pow(2, numOctaves* (element.val() - 1.0));
+	this.filter.frequency.value = maxVal * multiplier;
+};
+
 function getAverageVolume (array) {
 	var values = 0;
 	var average;
@@ -83,7 +104,7 @@ function getAverageVolume (array) {
 	};
 
 	return(values/length);
-}
+};
 
 function drawAudioSpectrum (array,ctx) {
 	for(var i=0;i<array.length;i++){

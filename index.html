@@ -159,6 +159,13 @@
 
 <!-- Audio controls -->
 <div class="row card-panel audio-controls">
+     <div id="frequency-rocker" class="btn-control range-field">
+    <div class="inline-label">
+        <label for="primary-frequency"><i class="mdi-av-volume-up small main-volume-control-label"></i></label>
+    </div>
+    <div class="inline-input">
+        <input type="range" min="0" max="10" step="0.2" value="1" name="frequency-rocker">
+    </div>
     <div id="primary-controls">
         <div id="pause" class="btn-control"><i class="mdi-av-pause medium"></i></div>
         <div id="play" class="btn-control"><i class="mdi-av-play-arrow large"></i></div>
@@ -169,7 +176,7 @@
         <label for="primary-volume"><i class="mdi-av-volume-up small main-volume-control-label"></i></label>
     </div>
     <div class="inline-input">
-        <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" orient="vertical" name="primary-volume-rocker">
+        <input type="range" min="0" max="10" step="0.2" value="1" data-control="gain" name="primary-volume-rocker">
     </div>
     </div>
     <div id="loop"><i class="mdi-av-repeat medium"></i></div>

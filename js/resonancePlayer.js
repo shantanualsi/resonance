@@ -81,4 +81,8 @@ $(function(){
 	$('#primary-volume-rocker input').change(function(){
 		audio.changeVolume($(this));
 	});
+
+	$('#frequency-rocker input').change(function () {
+		audio.changeFrequency($(this));
+	})
 });
